@@ -36,19 +36,38 @@
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
-  overflow: hidden;
+  overflow-x: auto;
+  /* Enable scroll for JS manipulation */
+  overflow-y: hidden;
   position: relative;
+  cursor: grab;
+  scroll-behavior: auto;
+  /* Instant scroll for drag */
+  -ms-overflow-style: none;
+  /* Hide scrollbar IE/Edge */
+  scrollbar-width: none;
+  /* Hide scrollbar Firefox */
+
   /* Fade edges */
   -webkit-mask-image: linear-gradient(to right,
       transparent 0%,
-      black 15%,
-      black 85%,
+      black 10%,
+      black 90%,
       transparent 100%);
   mask-image: linear-gradient(to right,
       transparent 0%,
-      black 15%,
-      black 85%,
+      black 10%,
+      black 90%,
       transparent 100%);
+}
+
+.ticker-wrapper::-webkit-scrollbar {
+  display: none;
+  /* Hide scrollbar Chrome/Safari */
+}
+
+.ticker-wrapper.dragging {
+  cursor: grabbing;
 }
 
 .ticker-track {
@@ -57,6 +76,7 @@
   width: max-content;
   padding: 2.5rem 0 4rem;
   animation: marquee 50s linear infinite;
+  pointer-events: auto;
 }
 
 @keyframes marquee {
@@ -65,8 +85,13 @@
   }
 
   to {
-    transform: translateX(calc(-50% - 1.25rem));
+    transform: translateX(calc(-10% - 0.25rem));
+    /* Adjust for 10x duplication - one full set is 10% */
   }
+}
+
+.ticker-track.paused {
+  animation-play-state: paused;
 }
 
 .ticker-wrapper:hover .ticker-track {
@@ -84,23 +109,27 @@
   padding: 3rem 2rem;
   text-align: center;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.75rem;
   backdrop-filter: blur(12px);
+  user-select: none;
+  /* Prevent text selection during drag */
 }
 
 [data-theme='light'] .svc-card {
-  background: #f5f5f5;
+  background: #ffffff;
   border-color: rgba(0, 0, 0, 0.05);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.03);
 }
 
 .svc-card:hover {
   transform: translateY(-15px) scale(1.02);
-  border-color: rgba(246, 92, 220, 0.4);
+  border-color: rgba(139, 92, 246, 0.4);
   box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
 }
 
@@ -117,6 +146,8 @@
   justify-content: center;
   transition: all 0.5s ease;
   padding: 1rem;
+  pointer-events: none;
+  /* Don't interfere with card click/drag */
 }
 
 .svc-img-3d {
@@ -137,12 +168,14 @@
   font-weight: 800;
   color: var(--text-primary);
   letter-spacing: -0.5px;
+  pointer-events: none;
 }
 
 .svc-desc {
   font-size: 0.95rem;
   color: var(--text-secondary);
   line-height: 1.6;
+  pointer-events: none;
 }
 
 /* ══════════════════════════════════════════

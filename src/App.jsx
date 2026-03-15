@@ -2,6 +2,7 @@ import React, { useEffect, useState, createContext, useContext } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
+import Faq from './components/Faq';
 import Team from './components/Team';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
@@ -35,12 +36,12 @@ function App() {
 
     const observerOptions = { root: null, threshold: 0.08 };
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-    
+
     const observe = () => {
       const elements = document.querySelectorAll('.reveal');
       elements.forEach(el => observer.observe(el));
     };
-    
+
     observe();
     const timer = setTimeout(observe, 500);
 
@@ -58,9 +59,11 @@ function App() {
         <main>
           <Hero />
           <Services />
+
           <Projects />
           <Team />
           <Contact />
+          <Faq />
         </main>
         <Footer />
       </div>

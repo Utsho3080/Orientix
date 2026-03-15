@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Sparkles, Zap, Phone, Target, ArrowRight, ChevronDown, X } from 'lucide-react';
 import './Services.css';
 
@@ -125,6 +125,12 @@ const SERVICES = [
 const Services = () => {
   const [selected, setSelected] = useState(null);
   const [expanded, setExpanded] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  
+  const tickerWrapperRef = useRef(null);
+  const isDown = useRef(false);
+  const startX = useRef(0);
+  const scrollLeftAnchor = useRef(0);
 
   const handleSelect = (svc) => {
     if (selected?.id === svc.id) {
@@ -135,12 +141,66 @@ const Services = () => {
     }
   };
 
+  const onMouseDown = (e) => {
+    if (selected) return;
+    isDown.current = true;
+    setIsPaused(true);
+    startX.current = e.pageX - tickerWrapperRef.current.offsetLeft;
+    scrollLeftAnchor.current = tickerWrapperRef.current.scrollLeft;
+  };
+
+  const onMouseLeave = () => {
+    isDown.current = false;
+    if (!selected) setIsPaused(false);
+  };
+
+  const onMouseUp = () => {
+    isDown.current = false;
+    if (!selected) setIsPaused(false);
+  };
+
+  const onMouseMove = (e) => {
+    if (!isDown.current || selected) return;
+    e.preventDefault();
+    const x = e.pageX - tickerWrapperRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5; 
+    tickerWrapperRef.current.scrollLeft = scrollLeftAnchor.current - walk;
+  };
+
+  // Robust Infinite Scroll Loop Logic for Manual Scrolling
+  useEffect(() => {
+    const handleScroll = () => {
+      const el = tickerWrapperRef.current;
+      if (!el || selected) return;
+
+      const { scrollLeft, scrollWidth } = el;
+      const singleSetWidth = scrollWidth / 10; // 10 sets now
+      
+      // If user drags too far left (towards 0), jump to a middle set
+      if (scrollLeft < singleSetWidth * 2) {
+        el.scrollLeft += singleSetWidth * 4;
+      } 
+      // If user drags too far right (towards end), jump back to a middle set
+      else if (scrollLeft > singleSetWidth * 6) {
+        el.scrollLeft -= singleSetWidth * 4;
+      }
+    };
+
+    const el = tickerWrapperRef.current;
+    if (el) {
+      el.addEventListener('scroll', handleScroll, { passive: true });
+      // Initialize in the exact center of the 10 sets
+      const singleSetWidth = el.scrollWidth / 10;
+      el.scrollLeft = singleSetWidth * 4.5;
+    }
+    return () => el?.removeEventListener('scroll', handleScroll);
+  }, [selected]);
+
   return (
     <section className="services" id="services">
       {/* ── Header ── */}
       <div className="services-header">
         <div>
-          {/*<span className="section-badge">What We Do</span>*/}
           <h2 className="services-title">
             Smart <em>Service</em><br />
             <em>That</em> Real Impact.
@@ -148,28 +208,40 @@ const Services = () => {
         </div>
       </div>
 
-      {/* ── Infinite marquee ticker (4 visible at a time) ── */}
+      {/* ── Infinite Scrolling Ticker (Draggable) ── */}
       {!selected && (
-        <div className="ticker-wrapper">
-          <div className="ticker-track">
-            {[...SERVICES, ...SERVICES].map((svc, i) => (
-              <button
-                key={`${svc.id}-${i}`}
-                className="svc-card ticker-card"
-                onClick={() => handleSelect(svc)}
-              >
-                <div className="svc-icon-wrap" style={{ background: svc.iconBg }}>
-                  <img src={svc.img} alt={svc.name} className="svc-img-3d" />
-                </div>
-                <h3 className="svc-name">{svc.name}</h3>
-                <p className="svc-desc">{svc.desc}</p>
-              </button>
+        <div 
+          className={`ticker-wrapper ${isPaused ? 'dragging' : ''}`}
+          ref={tickerWrapperRef}
+          onMouseDown={onMouseDown}
+          onMouseLeave={onMouseLeave}
+          onMouseUp={onMouseUp}
+          onMouseMove={onMouseMove}
+        >
+          <div className={`ticker-track ${isPaused ? 'paused' : ''}`}>
+            {/* Duplicating 10 times for a huge infinite buffer zone */}
+            {[...Array(10)].map((_, idx) => (
+              <React.Fragment key={idx}>
+                {SERVICES.map((svc, i) => (
+                  <button
+                    key={`${svc.id}-${idx}-${i}`}
+                    className="svc-card ticker-card"
+                    onClick={() => handleSelect(svc)}
+                  >
+                    <div className="svc-icon-wrap" style={{ background: svc.iconBg }}>
+                      <img src={svc.img} alt={svc.name} className="svc-img-3d" />
+                    </div>
+                    <h3 className="svc-name">{svc.name}</h3>
+                    <p className="svc-desc">{svc.desc}</p>
+                  </button>
+                ))}
+              </React.Fragment>
             ))}
           </div>
         </div>
       )}
 
-      {/* ── Expanded detail view (full width, in place) ── */}
+      {/* ── Expanded detail view ── */}
       {selected && (
         <div className="svc-expanded reveal active">
           {/* Top: mini service list */}
@@ -187,9 +259,7 @@ const Services = () => {
             ))}
           </div>
 
-          {/* Detail panel */}
           <div className="svc-detail-panel">
-            {/* Left — big icon card */}
             <div className="detail-icon-card" style={{ background: selected.iconBg }}>
               <div className="detail-img-glow" style={{ '--glow-color': selected.color }}>
                 <img src={selected.img} alt={selected.name} className="detail-img-3d" />
@@ -200,7 +270,6 @@ const Services = () => {
               </div>
             </div>
 
-            {/* Right — steps */}
             <div className="detail-steps">
               <button className="svc-close" onClick={() => setSelected(null)} aria-label="Close">
                 <X size={20} />
@@ -244,3 +313,5 @@ const Services = () => {
 };
 
 export default Services;
+
+
