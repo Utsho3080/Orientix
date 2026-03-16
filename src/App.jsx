@@ -5,6 +5,8 @@ import Services from './components/Services';
 import Faq from './components/Faq';
 import Team from './components/Team';
 import Projects from './components/Projects';
+import Packages from './components/Packages';
+import Logos from './components/Logos';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ParticleCanvas from './components/ParticleCanvas';
@@ -61,8 +63,11 @@ function App() {
           <Services />
 
           <Projects />
+          <Packages />
+
           <Team />
           <Contact />
+          <Logos />
           <Faq />
         </main>
         <Footer />

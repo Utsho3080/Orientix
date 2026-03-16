@@ -1,0 +1,142 @@
+/* ══════════════════════════════════════════
+   LOGOS / TOOLS TICKER SECTION
+   (Same infinite scroll pattern as Services)
+══════════════════════════════════════════ */
+.logos-section {
+  padding: 3rem 0 4rem;
+  background-color: var(--bg-surface);
+  position: relative;
+  overflow: hidden;
+}
+
+.logos-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding: 0 2rem;
+}
+
+.logos-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── Ticker Wrapper (mirrors Services ticker) ── */
+.logos-ticker-wrapper {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  overflow: hidden;
+  position: relative;
+
+  /* Fade edges */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+/* ── Ticker Track ── */
+.logos-ticker-track {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  width: max-content;
+  padding: 1rem 0;
+  animation: logoMarquee 40s linear infinite;
+}
+
+@keyframes logoMarquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-10% - 0.2rem)); }
+}
+
+/* ── Logo Chip ── */
+.logo-chip {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.25rem 1.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  cursor: default;
+  min-width: 100px;
+}
+
+.logo-chip:hover {
+  transform: translateY(-6px) scale(1.05);
+  border-color: rgba(139, 92, 246, 0.35);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+[data-theme='light'] .logo-chip {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme='light'] .logo-chip:hover {
+  box-shadow: 0 16px 40px rgba(139, 92, 246, 0.12);
+}
+
+/* ── Logo Image ── */
+.logo-img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+  transition: transform 0.3s ease;
+}
+
+.logo-chip:hover .logo-img {
+  transform: scale(1.12);
+}
+
+/* Dark mode: invert white/dark logos for visibility */
+[data-theme='dark'] .logo-img[alt='Express'],
+[data-theme='dark'] .logo-img[alt='WordPress'] {
+  filter: invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+}
+
+/* ── Logo Name ── */
+.logo-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .logos-section {
+    padding: 2.5rem 0 3rem;
+  }
+
+  .logo-chip {
+    padding: 1rem 1.25rem;
+    min-width: 85px;
+  }
+
+  .logo-img {
+    width: 36px;
+    height: 36px;
+  }
+}

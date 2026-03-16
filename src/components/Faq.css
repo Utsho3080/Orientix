@@ -3,7 +3,7 @@
 ══════════════════════════════════════════ */
 .faq {
   padding: 4rem 2rem;
-  background-color: var(--bg-surface);
+  background-color: var(--bg-color);
   position: relative;
 }
 

@@ -1,6 +1,6 @@
 .team {
   padding: 2rem 2rem;
-  background-color: var(--bg-surface);
+  background-color: var(--bg-color);
   position: relative;
   overflow: hidden;
 }
