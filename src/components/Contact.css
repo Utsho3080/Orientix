@@ -11,6 +11,8 @@
   max-width: 1200px;
   width: 100%;
   text-align: left;
+  margin-bottom: 3rem;
+
 }
 
 .contact-title {
@@ -37,6 +39,7 @@
   overflow: hidden;
   box-shadow: 0 40px 100px rgba(0, 0, 0, 0.15);
   border: 1px solid var(--border);
+
 }
 
 /* ── SIDEBAR (Left) ── */
