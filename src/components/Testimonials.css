@@ -2,7 +2,7 @@
    TESTIMONIALS SECTION
 ══════════════════════════════════════════ */
 .testimonials {
-  padding: 6rem 2rem;
+  padding: 6rem 6rem;
   background-color: var(--bg-surface);
   position: relative;
 }
@@ -215,7 +215,16 @@
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .testimonials { padding: 4rem 1.5rem; }
-  .testi-grid { grid-template-columns: 1fr; }
-  .testi-header { flex-direction: column; align-items: flex-start; }
+  .testimonials {
+    padding: 4rem 1.5rem;
+  }
+
+  .testi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testi-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

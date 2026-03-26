@@ -2,13 +2,13 @@
    PACKAGES / PRICING SECTION
 ══════════════════════════════════════════ */
 .packages {
-  padding: 4rem 2rem;
+  padding: 6rem 6rem;
   background-color: var(--bg-surface);
   position: relative;
 }
 
 .packages-container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -30,7 +30,8 @@
 
 .packages-title {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  ;
   font-weight: 700;
   letter-spacing: -1.5px;
   line-height: 1.1;

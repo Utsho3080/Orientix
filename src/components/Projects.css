@@ -2,7 +2,7 @@
    PROJECTS SECTION
 ══════════════════════════════════════════ */
 .projects {
-  padding: 2rem 0;
+  padding: 6rem 6rem;
   background-color: var(--bg-color);
   position: relative;
   width: 100vw;
@@ -25,7 +25,8 @@
 
 .projects-title {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  ;
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -2px;
@@ -43,6 +44,7 @@
   max-width: 500px;
   line-height: 1.6;
   margin-top: 1rem;
+  margin-bottom: 3rem;
 }
 
 /* ── Ticker Logic (Left to Right) ── */
