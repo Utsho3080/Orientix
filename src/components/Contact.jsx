@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { Mail, MessageCircle, Phone, Send } from 'lucide-react';
+import { Clock2, Mail, MapIcon, MessageCircle, Phone, Send } from 'lucide-react';
 import './Contact.css';
 
 const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
@@ -8,7 +8,7 @@ const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
 const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
 
 const EMAIL = 'sahasujit8100@gmail.com';
-const PHONE = '+91 6290575057';
+const PHONE = '+91 81007 30178';
 const background = '/contact_bg.png';
 
 const Contact = () => {
@@ -68,7 +68,7 @@ const Contact = () => {
               </div>
             </a>
 
-            <a
+            {/* <a
               href="https://wa.me/918583043080"
               target="_blank"
               rel="noopener noreferrer"
@@ -80,7 +80,7 @@ const Contact = () => {
               <div className="sidebar-text">
                 <p>Chat on WhatsApp</p>
               </div>
-            </a>
+            </a> */}
 
             <a href={`tel:${PHONE.replace(/\s/g, '')}`} className="sidebar-item link">
               <div className="sidebar-icon">
@@ -90,6 +90,23 @@ const Contact = () => {
                 <p>{PHONE}</p>
               </div>
             </a>
+            <a className="sidebar-item link">
+              <div className="sidebar-icon">
+                <MapIcon size={22} />
+              </div>
+              <div className="sidebar-text">
+                <p>Operated from Kolkata</p>
+              </div>
+            </a>
+            <a className="sidebar-item link">
+              <div className="sidebar-icon">
+                <Clock2 size={22} />
+              </div>
+              <div className="sidebar-text">
+                <p>Monday to Saturday,<br />10:00 AM to 7:00 PM</p>
+              </div>
+            </a>
+
 
           </div>
         </div>

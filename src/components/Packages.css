@@ -77,14 +77,6 @@
   box-shadow: 0 4px 14px var(--accent-glow);
 }
 
-[data-theme='light'] .pkg-tab {
-  color: #374151;
-}
-
-[data-theme='light'] .pkg-tab.active {
-  color: #ffffff;
-}
-
 /* ── Cards Grid ── */
 .pkg-grid {
   display: grid;
@@ -115,19 +107,11 @@
 
 .pkg-card.featured {
   background: #0f172a;
+  color: #ffffff;
   border-color: var(--accent);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
   transform: scale(1.04);
   z-index: 1;
-}
-
-.pkg-card.featured:hover {
-  transform: scale(1.04) translateY(-8px);
-}
-
-[data-theme='light'] .pkg-card.featured {
-  background: #0f172a;
-  color: #ffffff;
 }
 
 /* ── Popular Badge ── */

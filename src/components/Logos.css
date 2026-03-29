@@ -71,28 +71,19 @@
   align-items: center;
   gap: 0.6rem;
   padding: 1.25rem 1.75rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 20px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
   cursor: default;
   min-width: 100px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 }
 
 .logo-chip:hover {
   transform: translateY(-6px) scale(1.05);
   border-color: rgba(139, 92, 246, 0.35);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
-}
-
-[data-theme='light'] .logo-chip {
-  background: #ffffff;
-  border-color: rgba(0, 0, 0, 0.05);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-}
-
-[data-theme='light'] .logo-chip:hover {
   box-shadow: 0 16px 40px rgba(139, 92, 246, 0.12);
 }
 
@@ -103,16 +94,6 @@
   object-fit: contain;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
   transition: transform 0.3s ease;
-}
-
-.logo-chip:hover .logo-img {
-  transform: scale(1.12);
-}
-
-/* Dark mode: invert white/dark logos for visibility */
-[data-theme='dark'] .logo-img[alt='Express'],
-[data-theme='dark'] .logo-img[alt='WordPress'] {
-  filter: invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
 }
 
 /* ── Logo Name ── */

@@ -10,18 +10,13 @@
   text-align: center;
 }
 
+/* ── HERO BACKGROUND ── */
 .hero-background {
   position: absolute;
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  /* Removed global background so dark mode defaults back to your original styling */
-}
-
-/* ── LIGHT MODE HERO — matches the reference photo ── */
-
-/* Gradient: deep navy → rich indigo → vivid purple → soft lavender white */
-[data-theme='light'] .hero-background {
+  /* Premium Gradient: deep navy → rich indigo → vivid purple → soft lavender white */
   background: linear-gradient(180deg,
       #080b1a 0%,
       #12103a 25%,
@@ -31,56 +26,55 @@
       #ede9ff 100%);
 }
 
-/* Hide the subtle grid — it's invisible on this dark bg anyway */
-[data-theme='light'] .hero-grid {
+.hero-grid {
   display: none;
+  /* Hidden as per original light mode preference */
 }
 
 /* Tune orbs to match the vivid blue-purple look */
-[data-theme='light'] .orb-1 {
+.orb-1 {
   background: radial-gradient(circle, #4f46e5, #1e1b8e);
   opacity: 0.55;
 }
 
-[data-theme='light'] .orb-2 {
+.orb-2 {
   background: radial-gradient(circle, #7c3aed, #4338ca);
   opacity: 0.45;
 }
 
-[data-theme='light'] .orb-3 {
+.orb-3 {
   background: radial-gradient(circle, #a855f7, #6d28d9);
   opacity: 0.35;
 }
 
-/* Force ALL text inside hero to white — dark bg needs light text */
-[data-theme='light'] .hero-title,
-[data-theme='light'] .hero-subtitle,
-[data-theme='light'] .typewriter-text,
-[data-theme='light'] .typewriter-cursor,
-[data-theme='light'] .scroll-indicator {
+/* Hero text colors (white for contrast on the dark top gradient) */
+.hero-title,
+.hero-subtitle,
+.typewriter-text,
+.typewriter-cursor,
+.scroll-indicator {
   color: #ffffff;
-  -webkit-text-fill-color: #ffffff;
 }
 
-[data-theme='light'] .hero-badge {
+.hero-badge {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.3);
   color: #ffffff;
 }
 
-[data-theme='light'] .hero-subtitle {
-  color: rgba(255, 255, 255, 0.75);
+.hero-subtitle {
+  color: rgb(255, 255, 255);
 }
 
-/* Secondary (Book a call) button — light outline style on dark bg */
-[data-theme='light'] .hero .btn-secondary {
+/* Secondary (Book a call) button — light outline style */
+.hero .btn-secondary {
   color: #ffffff;
   border-color: rgba(255, 255, 255, 0.4);
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(8px);
 }
 
-[data-theme='light'] .hero .btn-secondary:hover {
+.hero .btn-secondary:hover {
   border-color: #ffffff;
   color: #ffffff;
   background: rgba(255, 255, 255, 0.18);
@@ -178,7 +172,7 @@
   line-height: 1.1;
   margin-bottom: 1.75rem;
   letter-spacing: -2px;
-  color: var(--text-primary);
+  color: white;
 }
 
 /* Typewriter */
@@ -223,7 +217,7 @@
 
 .hero-subtitle {
   font-size: clamp(1.05rem, 2vw, 1.2rem);
-  color: var(--text-secondary);
+  color: rgb(238, 238, 238);
   margin-bottom: 2.5rem;
   max-width: 650px;
   margin-inline: auto;

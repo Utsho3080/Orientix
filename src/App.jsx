@@ -13,20 +13,10 @@ import Footer from './components/Footer';
 import ParticleCanvas from './components/ParticleCanvas';
 import Testimonials from './components/Testimonials';
 
-export const ThemeContext = createContext();
-
-export const useTheme = () => useContext(ThemeContext);
-
 function App() {
-  const [theme, setTheme] = useState('light');
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
-  };
-
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
+    document.documentElement.setAttribute('data-theme', 'light');
+  }, []);
 
   useEffect(() => {
     const observerCallback = (entries, observer) => {
@@ -56,27 +46,25 @@ function App() {
   }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div className="app-container">
-        <ParticleCanvas />
-        <Navbar />
-        <ScrollToTop />
-        <main>
-          <Hero />
-          <Services />
+    <div className="app-container">
+      <ParticleCanvas />
+      <Navbar />
+      <ScrollToTop />
+      <main>
+        <Hero />
+        <Services />
 
-          <Projects />
-          <Packages />
+        <Projects />
+        <Packages />
 
-          <Team />
-          <Testimonials />
-          <Contact />
-          <Logos />
-          <Faq />
-        </main>
-        <Footer />
-      </div>
-    </ThemeContext.Provider>
+        <Team />
+        <Testimonials />
+        <Contact />
+        <Logos />
+        <Faq />
+      </main>
+      <Footer />
+    </div>
   );
 }
 

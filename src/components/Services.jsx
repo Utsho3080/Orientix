@@ -4,129 +4,180 @@ import './Services.css';
 
 const SERVICES = [
   {
-    id: 'web-dev',
-    name: 'Web Development',
-    img: '/icon/web_dev_3d_icon_1773515814250.png',
-    color: '#3b82f6',
-    iconBg: 'linear-gradient(135deg, #f0f7ff 0%, #e0efff 100%)',
-    desc: 'High-performance websites built for speed, scale, and conversion.',
+    id: 'web-dev-design',
+    name: 'Web Design & Development',
+    img: '/icon/Website UI-UX design & development.png',
+    color: '#6366f1',
+    iconBg: 'linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%)',
+    desc: 'High-performance websites for business growth',
     steps: [
-      { id: 1, title: 'Strategic Architecture Planning', desc: 'We map out the technical blue-print for scalability and performance.', color: '#3b82f6' },
-      { id: 2, title: 'Full-Stack Development', desc: 'Robust backends and pixel-perfect frontends using modern frameworks.', color: '#3b82f6' },
-      { id: 3, title: 'Optimization & Deployment', desc: 'Rigorous testing and cloud-native deployment for maximum uptime.', color: '#3b82f6' }
+      {
+        id: 1,
+        title: 'UI/UX Planning',
+        desc: 'Designing user-friendly layouts aligned with your brand and audience behavior.',
+        color: '#6366f1'
+      },
+      {
+        id: 2,
+        title: 'Development & Integration',
+        desc: 'Building responsive websites with CMS, contact forms, and modern technologies.',
+        color: '#6366f1'
+      },
+      {
+        id: 3,
+        title: 'SEO & Optimization',
+        desc: 'Optimizing speed, SEO structure, and deploying secure, scalable websites.',
+        color: '#6366f1'
+      }
     ]
   },
   {
-    id: 'web-design',
-    name: 'Web Design',
-    img: '/icon/web_design_3d_icon_1773515832448.png',
-    color: '#8b5cf6',
-    iconBg: 'linear-gradient(135deg, #f5f2ff 0%, #ede7ff 100%)',
-    desc: 'Stunning UI/UX that captivates visitors and drives engagement.',
+    id: 'app-design-dev',
+    name: 'App Design & Development',
+    img: '/icon/App Design& development.png',
+    color: '#a855f7',
+    iconBg: 'linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%)',
+    desc: 'Scalable mobile apps for seamless performance',
     steps: [
-      { id: 1, title: 'Visual Research & Analysis', desc: 'Deep-diving into your industry to find unique visual opportunities.', color: '#8b5cf6' },
-      { id: 2, title: 'Wireframing & Prototyping', desc: 'Iterative design process to perfect user flows and interactions.', color: '#8b5cf6' },
-      { id: 3, title: 'UI System Development', desc: 'Creating a cohesive and scalable design language for your brand.', color: '#8b5cf6' }
-    ]
-  },
-  {
-    id: 'app-design',
-    name: 'App Design',
-    img: '/icon/app_design_3d_icon_1773515851221.png',
-    color: '#ec4899',
-    iconBg: 'linear-gradient(135deg, #fff0f7 0%, #ffebf5 100%)',
-    desc: 'Beautiful mobile experiences users love to interact with.',
-    steps: [
-      { id: 1, title: 'Mobile UX Strategy', desc: 'Optimizing interfaces for small screens and thumb-driven interaction.', color: '#ec4899' },
-      { id: 2, title: 'Micro-Animation Design', desc: 'Adding delightful details that enhance usability and focus.', color: '#ec4899' },
-      { id: 3, title: 'High-Fidelity Mockups', desc: 'Production-ready designs with detailed specifications for dev.', color: '#ec4899' }
-    ]
-  },
-  {
-    id: 'app-dev',
-    name: 'App Development',
-    img: '/icon/app_dev_3d_icon_1773515871042.png',
-    color: '#06b6d4',
-    iconBg: 'linear-gradient(135deg, #f0fdff 0%, #e0faff 100%)',
-    desc: 'Cross-platform apps built with cutting-edge frameworks.',
-    steps: [
-      { id: 1, title: 'Native & Hybrid Strategy', desc: 'Choosing the right stack for your performance and budget needs.', color: '#06b6d4' },
-      { id: 2, title: 'Real-time Integrations', desc: 'Seamlessly connecting with APIs and external data services.', color: '#06b6d4' },
-      { id: 3, title: 'Performance Engineering', desc: 'Optimization for fast load times and battery efficiency.', color: '#06b6d4' }
+      {
+        id: 1,
+        title: 'App Strategy & UX',
+        desc: 'Planning app structure, user journey, and selecting the right technology stack.',
+        color: '#a855f7'
+      },
+      {
+        id: 2,
+        title: 'UI Design & Development',
+        desc: 'Creating intuitive designs and developing cross-platform apps (iOS & Android).',
+        color: '#a855f7'
+      },
+      {
+        id: 3,
+        title: 'Testing & Launch',
+        desc: 'Ensuring performance, security, and smooth deployment with ongoing scalability.',
+        color: '#a855f7'
+      }
     ]
   },
   {
     id: 'digital-marketing',
-    name: 'Digital Media Marketing',
-    img: '/icon/marketing_3d_icon_1773515887487.png',
+    name: 'Digital Marketing',
+    img: '/icon/Digital Marketing.png',
     color: '#f97316',
     iconBg: 'linear-gradient(135deg, #fff7ed 0%, #ffefe0 100%)',
-    desc: 'Data-driven campaigns that grow your audience and revenue.',
+    desc: 'Strategic digital marketing to grow your brand, audience, and revenue.',
     steps: [
-      { id: 1, title: 'Precision Ad Targeting', desc: 'Finding your exact audience on every major digital platform.', color: '#f97316' },
-      { id: 2, title: 'Viral Content Strategy', desc: 'Engineering content designed to be shared and remembered.', color: '#f97316' },
-      { id: 3, title: 'Conversion Optimization', desc: 'A/B testing and funnel tuning to maximize your ROI.', color: '#f97316' }
+      {
+        id: 1,
+        title: 'Social Media Management',
+        desc: 'Managing and growing your presence across Facebook, Instagram, LinkedIn & X.',
+        color: '#f97316'
+      },
+      {
+        id: 2,
+        title: 'Performance Marketing',
+        desc: 'Running targeted ad campaigns focused on lead generation and ROI.',
+        color: '#f97316'
+      },
+      {
+        id: 3,
+        title: 'SEO & Google Ads',
+        desc: 'Improving search rankings, visibility, and online reputation.',
+        color: '#f97316'
+      }
     ]
   },
   {
     id: 'digital-design',
-    name: 'Digital Design',
-    img: '/icon/digital_design_3d_icon_1773515902527.png',
+    name: 'Digital Media Design',
+    img: '/icon/Digital Media design.png',
     color: '#10b981',
     iconBg: 'linear-gradient(135deg, #f0fff7 0%, #e0fef0 100%)',
-    desc: 'Eye-catching digital assets that make your brand unforgettable.',
+    desc: 'Creative visuals that boost brand engagement',
     steps: [
-      { id: 1, title: 'Social Media Dynamics', desc: 'Designing assets tailored for the constraints of every platform.', color: '#10b981' },
-      { id: 2, title: 'Banner & Ad Creative', desc: 'High-impact visuals designed to grab attention and drive clicks.', color: '#10b981' },
-      { id: 3, title: 'Motion Graphic Assets', desc: 'Bringing designs to life with smooth, professional animation.', color: '#10b981' }
+      {
+        id: 1,
+        title: 'Social Media Creatives',
+        desc: 'Designing engaging posts and visuals tailored for digital platforms.',
+        color: '#10b981'
+      },
+      {
+        id: 2,
+        title: 'Ad & Banner Design',
+        desc: 'High-converting creatives for ads, campaigns, and promotions.',
+        color: '#10b981'
+      },
+      {
+        id: 3,
+        title: 'Motion Graphics',
+        desc: 'Animated visuals that enhance engagement and brand storytelling.',
+        color: '#10b981'
+      }
     ]
   },
   {
     id: 'print-design',
     name: 'Print Media Design',
-    img: '/icon/print_design_3d_icon_1773515922054.png',
+    img: '/icon/Print Media design.png',
     color: '#6366f1',
     iconBg: 'linear-gradient(135deg, #f3f5ff 0%, #eef1ff 100%)',
-    desc: 'Premium print collateral — from business cards to billboards.',
+    desc: 'Professional print materials that elevate your brand offline.',
     steps: [
-      { id: 1, title: 'Material Research', desc: 'Selecting the perfect paper, ink, and finishes for your project.', color: '#6366f1' },
-      { id: 2, title: 'Typography-Driven Layouts', desc: 'Expert typesetting for maximum readability and class.', color: '#6366f1' },
-      { id: 3, title: 'Pre-flight & Production', desc: 'Ensuring every file is technician-perfect for the printer.', color: '#6366f1' }
+      {
+        id: 1,
+        title: 'Marketing Collateral',
+        desc: 'Designing brochures, flyers, and corporate profiles.',
+        color: '#6366f1'
+      },
+      {
+        id: 2,
+        title: 'Packaging & Ads',
+        desc: 'Creative packaging and print advertisements that stand out.',
+        color: '#6366f1'
+      },
+      {
+        id: 3,
+        title: 'Outdoor Branding',
+        desc: 'Designing hoardings, flex, and signage for maximum visibility.',
+        color: '#6366f1'
+      }
     ]
   },
   {
     id: 'graphic-design',
     name: 'Graphic Design',
-    img: '/icon/graphic_design_3d_icon_1773515937946.png',
+    img: '/icon/Graphic design.png',
     color: '#f43f5e',
     iconBg: 'linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%)',
-    desc: 'Creative visuals that communicate your message powerfully.',
+    desc: 'Creative graphic solutions that communicate your brand effectively.',
     steps: [
-      { id: 1, title: 'Bespoke Illustration', desc: 'Custom artwork that gives your brand a unique voice.', color: '#f43f5e' },
-      { id: 2, title: 'Complex Vector Graphics', desc: 'Scalable visuals that look perfect from business cards to planes.', color: '#f43f5e' },
-      { id: 3, title: 'Visual Storytelling', desc: 'Crafting imagery that conveys your values instantly.', color: '#f43f5e' }
+      {
+        id: 1,
+        title: 'Logo & Identity Design',
+        desc: 'Creating unique logos and complete brand identity systems.',
+        color: '#f43f5e'
+      },
+      {
+        id: 2,
+        title: 'Marketing Designs',
+        desc: 'Designing posters, banners, and promotional creatives.',
+        color: '#f43f5e'
+      },
+      {
+        id: 3,
+        title: 'Business & Packaging Design',
+        desc: 'Business cards, brochures, catalogues, and packaging solutions.',
+        color: '#f43f5e'
+      }
     ]
-  },
-  {
-    id: 'branding',
-    name: 'Branding',
-    img: '/icon/branding_3d_icon_1773515955328.png',
-    color: '#a855f7',
-    iconBg: 'linear-gradient(135deg, #f9f5ff 0%, #f3ebff 100%)',
-    desc: 'A complete brand identity that tells your story and builds trust.',
-    steps: [
-      { id: 1, title: 'Brand Identity Audit', desc: 'Defining your brand voice, values, and core positioning.', color: '#a855f7' },
-      { id: 2, title: 'Visual Identity Design', desc: 'Building logos and color palettes that represent your future.', color: '#a855f7' },
-      { id: 3, title: 'Brand Guidelines Kit', desc: 'A roadmap for consistency across all your team members.', color: '#a855f7' }
-    ]
-  },
+  }
 ];
 
 const Services = () => {
   const [selected, setSelected] = useState(null);
   const [expanded, setExpanded] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  
+
   const tickerWrapperRef = useRef(null);
   const isDown = useRef(false);
   const startX = useRef(0);
@@ -163,7 +214,7 @@ const Services = () => {
     if (!isDown.current || selected) return;
     e.preventDefault();
     const x = e.pageX - tickerWrapperRef.current.offsetLeft;
-    const walk = (x - startX.current) * 1.5; 
+    const walk = (x - startX.current) * 1.5;
     tickerWrapperRef.current.scrollLeft = scrollLeftAnchor.current - walk;
   };
 
@@ -175,11 +226,11 @@ const Services = () => {
 
       const { scrollLeft, scrollWidth } = el;
       const singleSetWidth = scrollWidth / 10; // 10 sets now
-      
+
       // If user drags too far left (towards 0), jump to a middle set
       if (scrollLeft < singleSetWidth * 2) {
         el.scrollLeft += singleSetWidth * 4;
-      } 
+      }
       // If user drags too far right (towards end), jump back to a middle set
       else if (scrollLeft > singleSetWidth * 6) {
         el.scrollLeft -= singleSetWidth * 4;
@@ -210,7 +261,7 @@ const Services = () => {
 
       {/* ── Infinite Scrolling Ticker (Draggable) ── */}
       {!selected && (
-        <div 
+        <div
           className={`ticker-wrapper ${isPaused ? 'dragging' : ''}`}
           ref={tickerWrapperRef}
           onMouseDown={onMouseDown}

@@ -4,66 +4,66 @@ import './Projects.css';
 
 const PROJECTS = [
   {
-    title: 'Sproutwell E-Commerce',
+    title: 'sproutwelldecor',
     category: 'Web Development',
-    coverImage: 'https://images.unsplash.com/photo-1661956602116-aa6865609028?auto=format&fit=crop&q=80&w=800&h=500',
-    images: [
-      'https://images.unsplash.com/photo-1661956602116-aa6865609028?auto=format&fit=crop&q=80&w=1200&h=700',
-      'https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&q=80&w=1200&h=700',
-      'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=1200&h=700',
-    ],
+    coverImage: '/project/sproutwelldecor.jpeg',
+    images: ['/project/sproutwelldecor2.png'],
     description: 'A complete e-commerce platform overhaul resulting in a 40% increase in conversions and dramatically improved UX.',
-    liveUrl: '#',
-    tags: ['React', 'Node.js', 'MongoDB'],
+    liveUrl: 'https://sproutwelldecor.com.au/',
   },
   {
-    title: 'SaaS Analytics Dashboard',
-    category: 'Web Development',
-    coverImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800&h=500',
+    title: 'Fashion app UI Design',
+    category: 'App Design',
+    coverImage: '/project/fashion app design.jpeg',
     images: [
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200&h=700',
-      'https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&q=80&w=1200&h=700',
-      'https://images.unsplash.com/photo-1642790551116-18e4f468a4f5?auto=format&fit=crop&q=80&w=1200&h=700',
+      '/project/fashion app design 2.jpeg',
+      '/project/fashion app design 5.png',
     ],
     description: 'High-performance data dashboard with real-time analytics, custom charts, and a clean scalable React architecture.',
     liveUrl: '#',
-    tags: ['React', 'Chart.js', 'REST API'],
   },
   {
-    title: 'Global Growth Campaign',
-    category: 'Digital Marketing',
-    coverImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800&h=500',
-    images: [
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=700',
-      'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&q=80&w=1200&h=700',
-    ],
+    title: 'Educational Consultant website',
+    category: 'Web Development',
+    coverImage: '/project/educational website.jpeg',
+    images: ['/project/educational website 2.jpeg'],
     description: 'Omnichannel campaign hitting 2M+ users, boosting brand awareness 65% and tripling qualified inbound leads.',
     liveUrl: '#',
-    tags: ['SEO', 'Paid Ads', 'Content'],
   },
   {
     title: 'Beer App UI Design',
     category: 'App Design',
-    coverImage: 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?auto=format&fit=crop&q=80&w=800&h=500',
+    coverImage: '/project/beer_website.jpeg',
     images: [
       'https://images.unsplash.com/photo-1535958636474-b021ee887b13?auto=format&fit=crop&q=80&w=1200&h=700',
       'https://images.unsplash.com/photo-1608270586620-248524c67de9?auto=format&fit=crop&q=80&w=1200&h=700',
     ],
     description: 'A modern mobile app UI for a premium beer delivery service — intuitive browse, cart, and checkout experience.',
     liveUrl: '#',
-    tags: ['Figma', 'UI/UX', 'Prototyping'],
   },
   {
-    title: 'Brand Identity System',
-    category: 'Branding',
-    coverImage: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&q=80&w=800&h=500',
-    images: [
-      'https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&q=80&w=1200&h=700',
-      'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=1200&h=700',
-    ],
+    title: 'Seemy',
+    category: 'website design',
+    coverImage: '/project/seemy.jpeg',
+    images: ['/project/seemy 2.jpeg'],
     description: 'Full brand identity design including logo, color palette, typography system, and comprehensive brand guidelines.',
     liveUrl: '#',
-    tags: ['Illustrator', 'Branding', 'Print'],
+  },
+  {
+    title: 'Absolute Publisher',
+    category: 'Website Development',
+    coverImage: '/project/book publisher.jpeg',
+    images: ['/project/book publisher 2.jpeg'],
+    description: 'Full brand identity design including logo, color palette, typography system, and comprehensive brand guidelines.',
+    liveUrl: '#',
+  },
+  {
+    title: 'Doctor Mitchell',
+    category: 'Website Development',
+    coverImage: '/project/doctor website.jpg',
+    images: ['/project/doctor website 2.jpeg'],
+    description: 'a complete website for a doctor with all the features of a modern website with appoinment booking system and many more features',
+    liveUrl: '#',
   },
 ];
 
@@ -111,13 +111,12 @@ const ProjectModal = ({ project, onClose }) => {
             <span className="proj-modal-cat">{project.category}</span>
             <h3 className="proj-modal-title">{project.title}</h3>
             <p className="proj-modal-desc">{project.description}</p>
-            <div className="proj-modal-tags">
-              {project.tags.map((t, i) => <span key={i} className="proj-modal-tag">{t}</span>)}
-            </div>
           </div>
-          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="proj-live-btn">
-            <ExternalLink size={18} /> View Live Project
-          </a>
+          {project.liveUrl && project.liveUrl !== '#' && (
+            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="proj-live-btn">
+              <ExternalLink size={18} /> View Live Project
+            </a>
+          )}
         </div>
       </div>
     </div>
@@ -254,9 +253,6 @@ const Projects = () => {
                     <div className="proj-card-body">
                       <span className="proj-card-cat">{proj.category}</span>
                       <h3 className="proj-card-title">{proj.title}</h3>
-                      <div className="proj-card-tags">
-                        {proj.tags.slice(0, 2).map((t, ti) => <span key={ti} className="proj-card-tag">{t}</span>)}
-                      </div>
                     </div>
                   </button>
                 ))}
