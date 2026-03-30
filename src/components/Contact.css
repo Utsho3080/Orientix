@@ -126,6 +126,12 @@
   /* More glassmorphism feel */
 }
 
+.sidebar-icon img {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
+
 .sidebar-item.link:hover .sidebar-icon {
   border-color: #ffffff;
   background: rgba(255, 255, 255, 0.15);

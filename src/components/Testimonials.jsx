@@ -4,53 +4,31 @@ import './Testimonials.css';
 
 const TESTIMONIALS = [
   {
-    name: 'Arjun Mehta',
+    name: 'jamesrreed',
+    role: 'Founder',
+    company: 'Nobel CPS|Advisor',
+    avatar: 'https://www.freelancer.com/ppic/57219890/logo/4596200/profile_logo_4596200.jpg?image-optimizer=force&format=webply&width=120',
+    rating: 5,
+    review: "Sujit did an amazing job on my landing page design. Highly recommend. Fantastic submissions and perfect handover deliverables. Thank you.”",
+  },
+  {
+    name: 'lisacowley',
     role: 'Founder',
     company: 'Sproutwell',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150&h=150',
+    avatar: 'https://www.freelancer.com/ppic/39392794/logo/20891922/profile_logo_20891922.jpg?image-optimizer=force&format=webply&width=120',
     rating: 5,
-    review: "The team delivered an absolutely stunning e-commerce site. Our conversion rate jumped 40% in the first month. Professional, creative, and incredibly responsive — couldn't ask for more.",
+    review: "They do great work was very patience",
   },
-  {
-    name: 'Priya Singh',
-    role: 'Marketing Head',
-    company: 'GrowthLabs',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150&h=150',
-    rating: 5,
-    review: "Their social media strategy tripled our qualified leads within 2 months. The content quality was impeccable and the campaign targeting was laser-precise. Highly recommended!",
-  },
+
   {
     name: 'Rahul Verma',
-    role: 'CEO',
-    company: 'TechCore India',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150',
+    role: 'Founder',
+    company: 'Absolute Publisher',
+    avatar: '/man_icon.png',
     rating: 5,
-    review: "From logo to full brand identity system — they nailed every detail. The brand guidelines document alone was world-class. Our team uses it daily and clients love our new look.",
+    review: "They made a great website for my bussiness. It is very good and professional",
   },
-  {
-    name: 'Neha Kapoor',
-    role: 'Product Manager',
-    company: 'FinDash',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150&h=150',
-    rating: 5,
-    review: "The analytics dashboard they built handles 50k+ concurrent users flawlessly. Clean code, beautiful UI, and delivered ahead of schedule. The best dev team we've worked with.",
-  },
-  {
-    name: 'Suresh Kumar',
-    role: 'Director',
-    company: 'AdVantage',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150&h=150',
-    rating: 5,
-    review: "The paid ad campaigns they ran hit 2 million users and drove a 65% spike in brand awareness. The ROI was exceptional. We've renewed our contract for the third year running.",
-  },
-  {
-    name: 'Anita Rao',
-    role: 'Co-founder',
-    company: 'BeautyBloom',
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150&h=150',
-    rating: 5,
-    review: "Our Shopify redesign was transformative. The mobile experience especially is buttery smooth. Sales from mobile devices doubled and customer complaints about the site dropped to zero.",
-  },
+
 ];
 
 const StarRating = ({ rating }) => (

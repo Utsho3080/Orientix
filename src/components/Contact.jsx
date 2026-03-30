@@ -68,19 +68,19 @@ const Contact = () => {
               </div>
             </a>
 
-            {/* <a
-              href="https://wa.me/918583043080"
+            <a
+              href="https://wa.me/918100730178?text=Hi%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20discuss%20your%20services."
               target="_blank"
               rel="noopener noreferrer"
               className="sidebar-item link"
             >
               <div className="sidebar-icon">
-                <MessageCircle size={22} />
+                <img src="https://img.icons8.com/?size=100&id=16712&format=png&color=FFFFFFFF" alt="" />
               </div>
               <div className="sidebar-text">
                 <p>Chat on WhatsApp</p>
               </div>
-            </a> */}
+            </a>
 
             <a href={`tel:${PHONE.replace(/\s/g, '')}`} className="sidebar-item link">
               <div className="sidebar-icon">
