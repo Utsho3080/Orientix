@@ -73,7 +73,7 @@ const Hero = () => {
           <a href="#services" className="btn-primary hero-btn">
             Explore Services <ArrowRight size={18} />
           </a>
-          <a href="tel:+916290575057" className="btn-secondary hero-btn">
+          <a href="tel:+91 81007 30178" className="btn-secondary hero-btn">
             {/* 3. Changed button text */}
             Book a call ↗
           </a>

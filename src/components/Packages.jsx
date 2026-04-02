@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Check, Phone, Star } from 'lucide-react';
 import './Packages.css';
 
-const PHONE = '+916290575057';
+const PHONE = '+91 81007 30178';
 
 const MARKETING_PACKAGES = [
   {
