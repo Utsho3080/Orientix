@@ -4,7 +4,7 @@ import { Clock2, Mail, MapIcon, MessageCircle, Phone, Send } from 'lucide-react'
 import './Contact.css';
 
 const EMAILJS_SERVICE_ID = 'service_av39uow';
-const EMAILJS_TEMPLATE_ID = '__ejs-test-mail-service__';
+const EMAILJS_TEMPLATE_ID = 'template_5hzu9nq';
 const EMAILJS_PUBLIC_KEY = '7Juya_vy218l5zOG0';
 
 const EMAIL = 'support.orientix@gmail.com';
