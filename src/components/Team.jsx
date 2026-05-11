@@ -4,13 +4,13 @@ import './Team.css';
 
 const Team = () => {
   const teamMembers = [
-    {
-      role: 'Lead Developer',
-      name: 'Utsho Saha',
-      image: '/Utsho Saha.png',
-      description: 'Full-stack architect building scalable, high-performance applications, specializing in MERN, Python, and AI-driven solutions.',
-      socials: { linkedin: 'https://www.linkedin.com/in/utsho-saha-14485b219' }
-    },
+    // {
+    //   role: 'Lead Developer',
+    //   name: 'Utsho Saha',
+    //   image: '/Utsho Saha.png',
+    //   description: 'Full-stack architect building scalable, high-performance applications, specializing in MERN, Python, and AI-driven solutions.',
+    //   socials: { linkedin: 'https://www.linkedin.com/in/utsho-saha-14485b219' }
+    // },
     {
       role: 'Marketing Head',
       name: 'Sujit Saha',
