@@ -7,7 +7,7 @@ const PHONE = '+91 81007 30178';
 const MARKETING_PACKAGES = [
   {
     tier: 'Silver',
-    price: '₹6,999',
+    price: '₹9,999',
     period: 'Per month',
     tagline: 'Ideal for startups & local businesses — build presence & brand identity.',
     features: [
@@ -25,7 +25,7 @@ const MARKETING_PACKAGES = [
   },
   {
     tier: 'Gold',
-    price: '₹9,999',
+    price: '₹12,999',
     period: 'Per month',
     tagline: 'Ideal for growing brands — stronger engagement & lead generation.',
     features: [
@@ -43,7 +43,7 @@ const MARKETING_PACKAGES = [
   },
   {
     tier: 'Diamond',
-    price: '₹11,999',
+    price: '₹14,999',
     period: 'Per month',
     tagline: 'Ideal for established brands — premium creative & ad performance.',
     features: [
