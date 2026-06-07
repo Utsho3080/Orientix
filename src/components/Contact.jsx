@@ -23,7 +23,8 @@ const Contact = () => {
     e.preventDefault();
     setStatus('sending');
     try {
-      await emailjs.send(
+      // Send to EmailJS
+      emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         {
@@ -34,11 +35,25 @@ const Contact = () => {
           to_email: EMAIL,
         },
         EMAILJS_PUBLIC_KEY
-      );
+      ).catch(console.error);
+
+      // Save to CRM Database
+      await fetch('http://localhost:5000/api/crm/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: `Phone: ${form.phone}\n\nMessage: ${form.message}`
+        })
+      });
+
       setStatus('success');
-      setForm({ name: '', email: '', message: '' });
+      setForm({ name: '', email: '', phone: '', message: '' });
     } catch (err) {
-      console.error('EmailJS error:', err);
+      console.error('Contact form error:', err);
       setStatus('error');
     }
   };

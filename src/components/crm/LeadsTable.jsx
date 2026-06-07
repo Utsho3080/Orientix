@@ -9,7 +9,7 @@ const LeadsTable = () => {
 
   // Pagination State
   const [currentPage, setCurrentPage] = useState(1);
-  const leadsPerPage = 10;
+  const leadsPerPage = 50;
 
   const fetchLeads = async () => {
     try {
@@ -146,12 +146,13 @@ const LeadsTable = () => {
 
                 const fb = outscraper.company_facebook || outscraper.facebook || outscraper['Facebook URL'];
                 const ig = outscraper.company_instagram || outscraper.instagram || outscraper['Instagram URL'];
-                const yt = outscraper.youtube || outscraper.YouTube || outscraper['YouTube URL'];
+                const yt = outscraper.company_youtube || outscraper.youtube || outscraper.YouTube || outscraper['YouTube URL'];
                 const web = outscraper.website || outscraper.Website;
 
                 let cleanName = lead.name;
                 if (cleanName && typeof cleanName === 'string') {
-                  cleanName = cleanName.split(/ - | \| | , /)[0].trim();
+                  cleanName = cleanName.split(/\s*(?:-|\||:)\s*/)[0].trim();
+                  cleanName = cleanName.split(/\s*(?:offers|treated\s+\d+|best\s+doctor|best\s+dermatologist|best\s+orthopedician|best\s+orthopedic|laser\s+hair|knee\s+replacement|joint\s+replacement|spine\s+surgeon).*/i)[0].trim();
                 }
 
                 // Email Body Paragraph

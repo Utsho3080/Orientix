@@ -3,6 +3,8 @@ import { useNavigate, Navigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import './Auth.css';
 
+import TwoFactorSetup from '../../components/auth/TwoFactorSetup';
+
 const TwoFactorAuth = () => {
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
@@ -13,6 +15,8 @@ const TwoFactorAuth = () => {
   if (!isAuthenticated && !localStorage.getItem('temp_jwt')) {
     return <Navigate to="/login" replace />;
   }
+
+  const hasTotp = localStorage.getItem('has_totp') === 'true';
 
   const handleVerify = async (e) => {
     e.preventDefault();
@@ -37,28 +41,32 @@ const TwoFactorAuth = () => {
 
   return (
     <div className="auth-container">
-      <div className="auth-card">
-        <h2>Two-Factor Authentication</h2>
-        <p>Open your Google Authenticator app and enter the 6-digit code for your Orientix account.</p>
-        
-        <form className="auth-form" onSubmit={handleVerify}>
-          <div className="form-group">
-            <label>Authentication Code</label>
-            <input 
-              type="text" 
-              maxLength="6"
-              placeholder="123456" 
-              value={code}
-              onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
-            />
-            {error && <span className="error-text">{error}</span>}
-          </div>
+      {!hasTotp ? (
+        <TwoFactorSetup />
+      ) : (
+        <div className="auth-card">
+          <h2>Two-Factor Authentication</h2>
+          <p>Open your Google Authenticator app and enter the 6-digit code for your Orientix account.</p>
           
-          <button type="submit" className="submit-btn" disabled={code.length !== 6}>
-            Verify & Proceed
-          </button>
-        </form>
-      </div>
+          <form className="auth-form" onSubmit={handleVerify}>
+            <div className="form-group">
+              <label>Authentication Code</label>
+              <input 
+                type="text" 
+                maxLength="6"
+                placeholder="123456" 
+                value={code}
+                onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
+              />
+              {error && <span className="error-text">{error}</span>}
+            </div>
+            
+            <button type="submit" className="submit-btn" disabled={code.length !== 6}>
+              Verify & Proceed
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   );
 };

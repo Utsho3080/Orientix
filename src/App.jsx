@@ -31,6 +31,10 @@ import SuperAdminDashboard from './pages/superadmin/SuperAdminDashboard';
 // CRM Components
 import LeadsTable from './components/crm/LeadsTable';
 import DataUploader from './components/crm/DataUploader';
+import ClientOnboarding from './components/crm/ClientOnboarding';
+import CmsSettings from './components/crm/CmsSettings';
+import AuditLogs from './components/crm/AuditLogs';
+import ContactMessages from './components/crm/ContactMessages';
 
 function PublicSite() {
   useEffect(() => {
@@ -106,6 +110,8 @@ function App() {
         >
           <Route index element={<AdminDashboard />} />
           <Route path="leads" element={<LeadsTable />} />
+          <Route path="onboarding" element={<ClientOnboarding />} />
+          <Route path="contact-messages" element={<ContactMessages />} />
         </Route>
 
         {/* Super Admin Portal (Walled Garden 2) */}
@@ -120,6 +126,10 @@ function App() {
           <Route index element={<SuperAdminDashboard />} />
           <Route path="leads" element={<LeadsTable />} />
           <Route path="upload" element={<DataUploader />} />
+          <Route path="onboarding" element={<ClientOnboarding />} />
+          <Route path="cms" element={<CmsSettings />} />
+          <Route path="audit" element={<AuditLogs />} />
+          <Route path="contact-messages" element={<ContactMessages />} />
         </Route>
       </Routes>
     </AuthProvider>

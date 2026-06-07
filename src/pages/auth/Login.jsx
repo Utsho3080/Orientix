@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import './Auth.css';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleMockLogin = async (role) => {
-    // 1. Trigger the context login which fetch JWT from the real Express server
-    await login(role);
-    // 2. Push user to the 2FA test screen 
-    navigate('/verify-2fa');
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      await login(email, password);
+      navigate('/verify-2fa');
+    } catch (err) {
+      setError(err.message || 'Login failed. Please check credentials.');
+    }
   };
 
   return (
@@ -20,33 +27,31 @@ const Login = () => {
         <h2>Orientix CRM Login</h2>
         <p>Enter your credentials to access the internal dashboard.</p>
         
-        <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
+        <form className="auth-form" onSubmit={handleLogin}>
+          {error && <div className="error-text" style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
           <div className="form-group">
             <label>Email Address</label>
-            <input type="email" placeholder="admin@orientix.com" disabled />
+            <input 
+              type="email" 
+              placeholder="e.g. founder.orientix@gmail.com" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required 
+            />
           </div>
           <div className="form-group">
             <label>Password</label>
-            <input type="password" placeholder="••••••••" disabled />
+            <input 
+              type="password" 
+              placeholder="••••••••" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required 
+            />
           </div>
-          
-          <div className="devel-actions">
-            <span className="devel-label">Mock Login Options (Dev Mode):</span>
-            <button 
-              type="button" 
-              className="btn-admin"
-              onClick={() => handleMockLogin('ADMIN')}
-            >
-              Login as Standard Admin
-            </button>
-            <button 
-              type="button" 
-              className="btn-superadmin"
-              onClick={() => handleMockLogin('SUPER_ADMIN')}
-            >
-              Login as Super Admin
-            </button>
-          </div>
+          <button type="submit" className="submit-btn" style={{ marginTop: '1rem', width: '100%', padding: '12px', background: '#3b82f6', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
+            Sign In
+          </button>
         </form>
       </div>
     </div>

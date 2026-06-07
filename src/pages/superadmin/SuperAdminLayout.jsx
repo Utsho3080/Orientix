@@ -24,15 +24,24 @@ const SuperAdminLayout = () => {
           <NavLink to="/superadmin/leads" className={({isActive}) => isActive ? 'active' : ''}>
             Lead Management (CRUD)
           </NavLink>
-          <a href="#onboarding" className="disabled-link">Client Onboarding (CRUD)</a>
+          <NavLink to="/superadmin/onboarding" className={({isActive}) => isActive ? 'active' : ''}>
+            Client Onboarding
+          </NavLink>
+          <NavLink to="/superadmin/contact-messages" className={({isActive}) => isActive ? 'active' : ''}>
+            Contact Messages
+          </NavLink>
           
           <div className="nav-section">Executive</div>
           <a href="#analytics" className="disabled-link">Google Analytics</a>
-          <a href="#cms" className="disabled-link">CMS Settings (Hero/Text)</a>
+          <NavLink to="/superadmin/cms" className={({isActive}) => isActive ? 'active' : ''}>
+            CMS Settings
+          </NavLink>
           <NavLink to="/superadmin/upload" className={({isActive}) => isActive ? 'active nav-danger' : 'nav-danger'}>
             Upload Excel Data
           </NavLink>
-          <a href="#audit" className="disabled-link nav-danger">Audit Logs</a>
+          <NavLink to="/superadmin/audit" className={({isActive}) => isActive ? 'active nav-danger' : 'nav-danger'}>
+            Audit Logs
+          </NavLink>
         </nav>
 
         <div className="sidebar-footer">

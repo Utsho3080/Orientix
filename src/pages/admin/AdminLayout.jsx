@@ -1,5 +1,6 @@
 import React from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
+import { MessageSquare } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import './Admin.css';
 
@@ -22,7 +23,12 @@ const AdminLayout = () => {
           <NavLink to="/admin/leads" className={({isActive}) => isActive ? 'active' : ''}>
             Lead Pipeline
           </NavLink>
-          <a href="#onboarding" className="disabled-link">Client Onboarding (Read Only)</a>
+          <NavLink to="/admin/onboarding" className={({isActive}) => isActive ? 'active' : ''}>
+            Client Onboarding
+          </NavLink>
+          <NavLink to="/admin/contact-messages" className={({isActive}) => isActive ? 'active' : ''}>
+            Contact Messages
+          </NavLink>
         </nav>
 
         <div className="sidebar-footer">
