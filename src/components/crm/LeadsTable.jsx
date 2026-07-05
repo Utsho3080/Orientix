@@ -14,7 +14,7 @@ const LeadsTable = () => {
   const fetchLeads = async () => {
     try {
       const token = localStorage.getItem('crm_token');
-      const response = await fetch('/api/crm/leads', {
+      const response = await fetch('http://localhost:5000/api/crm/leads', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 
@@ -38,7 +38,7 @@ const LeadsTable = () => {
       const payload = {};
       payload[fieldName] = value;
 
-      const response = await fetch(`/api/crm/leads/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/crm/leads/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

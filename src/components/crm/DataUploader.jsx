@@ -22,7 +22,7 @@ const DataUploader = () => {
 
     try {
       const token = localStorage.getItem('crm_token');
-      const response = await fetch('/api/crm/upload', {
+      const response = await fetch('http://localhost:5000/api/crm/upload', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

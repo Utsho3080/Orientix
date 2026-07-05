@@ -31,7 +31,7 @@ const ClientOnboarding = () => {
   const fetchClients = async () => {
     try {
       const token = localStorage.getItem('crm_token');
-      const response = await fetch('/api/crm/clients', {
+      const response = await fetch('http://localhost:5000/api/crm/clients', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!response.ok) throw new Error('Failed to fetch clients');
@@ -52,7 +52,7 @@ const ClientOnboarding = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('crm_token');
-      const response = await fetch('/api/crm/clients', {
+      const response = await fetch('http://localhost:5000/api/crm/clients', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ const ClientOnboarding = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('crm_token');
-      const response = await fetch(`/api/crm/clients/${activeClient.id}`, {
+      const response = await fetch(`http://localhost:5000/api/crm/clients/${activeClient.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ const ClientOnboarding = () => {
     if (!window.confirm('Are you sure you want to delete this client?')) return;
     try {
       const token = localStorage.getItem('crm_token');
-      const response = await fetch(`/api/crm/clients/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/crm/clients/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

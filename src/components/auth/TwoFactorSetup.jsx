@@ -16,7 +16,7 @@ const TwoFactorSetup = ({ onSetupComplete }) => {
     const fetchQrCode = async () => {
       try {
         const tempToken = localStorage.getItem('temp_jwt');
-        const response = await fetch('/api/auth/generate-2fa', {
+        const response = await fetch('http://localhost:5000/api/auth/generate-2fa', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ token: tempToken })
