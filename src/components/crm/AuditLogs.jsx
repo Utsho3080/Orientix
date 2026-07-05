@@ -11,7 +11,7 @@ const AuditLogs = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('crm_token');
-      const response = await fetch('http://localhost:5000/api/crm/audit', {
+      const response = await fetch('/api/crm/audit', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!response.ok) throw new Error('Failed to fetch audit logs');

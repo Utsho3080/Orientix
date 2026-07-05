@@ -10,7 +10,7 @@ const ContactMessages = () => {
   const fetchMessages = async () => {
     try {
       const token = localStorage.getItem('crm_token');
-      const response = await fetch('http://localhost:5000/api/crm/contact-messages', {
+      const response = await fetch('/api/crm/contact-messages', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!response.ok) throw new Error('Failed to fetch contact messages');

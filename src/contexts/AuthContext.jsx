@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
   // Step 1: Login with Email/Password (Connecting to backend)
   const login = async (email, password) => {
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
   const verify2FA = async (code) => {
     try {
       const tempToken = localStorage.getItem('temp_jwt');
-      const response = await fetch('http://localhost:5000/api/auth/verify-2fa', {
+      const response = await fetch('/api/auth/verify-2fa', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code: code, tempToken: tempToken })
@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
   const setup2FA = async (code, secret) => {
     try {
       const tempToken = localStorage.getItem('temp_jwt');
-      const response = await fetch('http://localhost:5000/api/auth/verify-2fa-setup', {
+      const response = await fetch('/api/auth/verify-2fa-setup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code, secret, token: tempToken })

@@ -26,27 +26,27 @@ const Login = () => {
       <div className="auth-card">
         <h2>Orientix CRM Login</h2>
         <p>Enter your credentials to access the internal dashboard.</p>
-        
+
         <form className="auth-form" onSubmit={handleLogin}>
           {error && <div className="error-text" style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
           <div className="form-group">
             <label>Email Address</label>
-            <input 
-              type="email" 
-              placeholder="e.g. founder.orientix@gmail.com" 
+            <input
+              type="email"
+              placeholder="e.g. Admin@gmail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required 
+              required
             />
           </div>
           <div className="form-group">
             <label>Password</label>
-            <input 
-              type="password" 
-              placeholder="••••••••" 
+            <input
+              type="password"
+              placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required 
+              required
             />
           </div>
           <button type="submit" className="submit-btn" style={{ marginTop: '1rem', width: '100%', padding: '12px', background: '#3b82f6', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>

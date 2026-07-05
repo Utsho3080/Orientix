@@ -25,9 +25,9 @@ const CmsSettings = () => {
   const fetchData = async () => {
     try {
       const [settingsRes, packagesRes, testimonialsRes] = await Promise.all([
-        fetch('http://localhost:5000/api/crm/cms'),
-        fetch('http://localhost:5000/api/crm/cms/packages'),
-        fetch('http://localhost:5000/api/crm/cms/testimonials')
+        fetch('/api/crm/cms'),
+        fetch('/api/crm/cms/packages'),
+        fetch('/api/crm/cms/testimonials')
       ]);
       
       const settingsData = await settingsRes.json();
@@ -52,7 +52,7 @@ const CmsSettings = () => {
     setSuccessMsg(''); setError('');
     try {
       const token = localStorage.getItem('crm_token');
-      const response = await fetch('http://localhost:5000/api/crm/cms', {
+      const response = await fetch('/api/crm/cms', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ hero_title: heroTitle, hero_subtitle: heroSubtitle, contact_email: contactEmail, contact_phone: contactPhone })
@@ -68,7 +68,7 @@ const CmsSettings = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('crm_token');
-      const response = await fetch('http://localhost:5000/api/crm/cms/packages', {
+      const response = await fetch('/api/crm/cms/packages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(newPackage)
@@ -86,7 +86,7 @@ const CmsSettings = () => {
     if(!window.confirm('Delete package?')) return;
     try {
       const token = localStorage.getItem('crm_token');
-      await fetch(`http://localhost:5000/api/crm/cms/packages/${id}`, {
+      await fetch(`/api/crm/cms/packages/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -98,7 +98,7 @@ const CmsSettings = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('crm_token');
-      const response = await fetch('http://localhost:5000/api/crm/cms/testimonials', {
+      const response = await fetch('/api/crm/cms/testimonials', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(newTestimonial)
@@ -116,7 +116,7 @@ const CmsSettings = () => {
     if(!window.confirm('Delete testimonial?')) return;
     try {
       const token = localStorage.getItem('crm_token');
-      await fetch(`http://localhost:5000/api/crm/cms/testimonials/${id}`, {
+      await fetch(`/api/crm/cms/testimonials/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
