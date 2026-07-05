@@ -38,7 +38,7 @@ const Contact = () => {
       ).catch(console.error);
 
       // Save to CRM Database
-      await fetch('http://localhost:5000/api/crm/contact', {
+      await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/crm/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
