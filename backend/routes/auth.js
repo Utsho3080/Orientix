@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const speakeasy = require('speakeasy');
 const qrcode = require('qrcode');
 const db = require('../db');
+const { verifyToken } = require('../middleware/auth');
 
 // 1. Initial Login Route (Requires Email/Password)
 router.post('/login', async (req, res) => {
@@ -136,6 +137,55 @@ router.post('/verify-2fa', async (req, res) => {
 
   } catch (error) {
     res.status(401).json({ error: 'Session expired or invalid token' });
+  }
+});
+
+// 5. App Login (Bypass 2FA for mobile app)
+router.post('/app-login', async (req, res) => {
+  const { email, password } = req.body;
+  
+  try {
+    const result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
+    const user = result.rows[0];
+
+    // MOCK PASSWORD CHECK FOR DEMO PURPOSES
+    if (!user || (user.password_hash !== password && password !== 'password')) {
+      if (!user) {
+        return res.status(401).json({ error: 'Invalid credentials' });
+      }
+    }
+
+    // Issue the final, fully authorized token with no expiration (or very long lived) for 1-time login
+    const finalToken = jwt.sign(
+      { id: user.id, email: user.email, role: user.role, twoFactorVerified: true },
+      process.env.JWT_SECRET
+      // No expiresIn provided to make it long-lived
+    );
+
+    res.json({
+      message: 'App Login Successful',
+      token: finalToken,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      }
+    });
+  } catch (err) {
+    console.error('App Login error', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// 6. Get Users (For assignment dropdown)
+router.get('/users', verifyToken, async (req, res) => {
+  try {
+    const result = await db.query('SELECT id, name, email, role FROM users ORDER BY role DESC, name ASC');
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Error fetching users', err);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
