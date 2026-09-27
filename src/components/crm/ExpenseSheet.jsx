@@ -21,10 +21,7 @@ const PARTNERS = ['Sujit', 'Utsho', 'Shreya'];
 const HOLDINGS = ['Bank', 'Sujit', 'Utsho', 'Shreya'];
 
 // API Base URL - Uses VITE_API_URL or VITE_API_URL2, defaults to localhost in dev, or Render in production
-const token = localStorage.getItem('crm_token');
-const response = await fetch(`${import.meta.env.VITE_API_URL2 || 'http://localhost:5000'}/api/crm/expenses`, {
-  headers: { 'Authorization': `Bearer ${token}` }
-});
+const API_BASE = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_URL2 || 'https://orientix-wzio.onrender.com';
 
 // Helper to convert email into friendly admin name
 const getAdminName = (raw) => {
