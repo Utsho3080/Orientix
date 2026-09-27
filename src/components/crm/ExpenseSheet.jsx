@@ -75,10 +75,19 @@ const ExpenseSheet = () => {
   const fetchTransactions = async () => {
     try {
       const token = localStorage.getItem('crm_token');
+      if (!token) {
+        throw new Error('No active session found. Please log in again.');
+      }
       const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/crm/expenses`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
-      if (!response.ok) throw new Error('Failed to fetch transactions');
+      if (!response.ok) {
+        if (response.status === 401 || response.status === 403) {
+          throw new Error('Your session has expired or requires Super Admin permissions. Please log out and log back in.');
+        }
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(errData.error || `Server responded with status ${response.status}`);
+      }
       const data = await response.json();
       setTransactions(data);
     } catch (err) {
@@ -361,7 +370,36 @@ const ExpenseSheet = () => {
   });
 
   if (loading) return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading expense sheet...</div>;
-  if (error) return <div className="security-notice">Error: {error}</div>;
+  if (error) {
+    return (
+      <div className="crm-container" style={{ padding: '2rem' }}>
+        <div className="security-notice" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div><strong>Error:</strong> {error}</div>
+          <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
+            <button
+              onClick={() => { setError(''); setLoading(true); fetchTransactions(); }}
+              className="action-btn"
+              style={{ backgroundColor: '#2563eb', color: 'white', border: 'none', padding: '6px 14px', borderRadius: '6px', cursor: 'pointer' }}
+            >
+              Retry
+            </button>
+            <button
+              onClick={() => {
+                localStorage.removeItem('crm_token');
+                localStorage.removeItem('crm_role');
+                localStorage.removeItem('temp_jwt');
+                window.location.href = '/login';
+              }}
+              className="action-btn"
+              style={{ backgroundColor: '#dc2626', color: 'white', border: 'none', padding: '6px 14px', borderRadius: '6px', cursor: 'pointer' }}
+            >
+              Log In Again
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="crm-container">
