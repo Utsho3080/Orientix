@@ -20,8 +20,13 @@ const CATEGORIES = [
 const PARTNERS = ['Sujit', 'Utsho', 'Shreya'];
 const HOLDINGS = ['Bank', 'Sujit', 'Utsho', 'Shreya'];
 
-// API Base URL - Uses VITE_API_URL or defaults to localhost in dev, or relative in production
-const API_BASE = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:5000' : '');
+// API Base URL - Uses VITE_API_URL or VITE_API_URL2, defaults to localhost in dev, or Render in production
+const API_BASE = 
+  import.meta.env.VITE_API_URL || 
+  import.meta.env.VITE_API_URL2 || 
+  (typeof window !== 'undefined' && window.location.hostname === 'localhost' 
+    ? 'http://localhost:5000' 
+    : 'https://orientix-wzio.onrender.com');
 
 // Helper to convert email into friendly admin name
 const getAdminName = (raw) => {
