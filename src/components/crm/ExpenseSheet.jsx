@@ -20,6 +20,9 @@ const CATEGORIES = [
 const PARTNERS = ['Sujit', 'Utsho', 'Shreya'];
 const HOLDINGS = ['Bank', 'Sujit', 'Utsho', 'Shreya'];
 
+// API Base URL - Uses VITE_API_URL or defaults to localhost in dev, or relative in production
+const API_BASE = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:5000' : '');
+
 // Helper to convert email into friendly admin name
 const getAdminName = (raw) => {
   if (!raw) return 'Admin';
@@ -75,10 +78,19 @@ const ExpenseSheet = () => {
   const fetchTransactions = async () => {
     try {
       const token = localStorage.getItem('crm_token');
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/crm/expenses`, {
+      if (!token) {
+        throw new Error('No active session found. Please log in again.');
+      }
+      const response = await fetch(`${API_BASE}/api/crm/expenses`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
-      if (!response.ok) throw new Error('Failed to fetch transactions');
+      if (!response.ok) {
+        if (response.status === 401 || response.status === 403) {
+          throw new Error('Your session has expired or requires Super Admin permissions. Please log out and log back in.');
+        }
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(errData.error || `Server responded with status ${response.status}`);
+      }
       const data = await response.json();
       setTransactions(data);
     } catch (err) {
@@ -103,8 +115,8 @@ const ExpenseSheet = () => {
       const token = localStorage.getItem('crm_token');
       const method = editingId ? 'PUT' : 'POST';
       const url = editingId
-        ? `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/crm/expenses/${editingId}`
-        : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/crm/expenses`;
+        ? `${API_BASE}/api/crm/expenses/${editingId}`
+        : `${API_BASE}/api/crm/expenses`;
 
       const response = await fetch(url, {
         method: method,
@@ -139,7 +151,7 @@ const ExpenseSheet = () => {
 
     try {
       const token = localStorage.getItem('crm_token');
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/crm/expenses/transfer`, {
+      const response = await fetch(`${API_BASE}/api/crm/expenses/transfer`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -171,7 +183,7 @@ const ExpenseSheet = () => {
     if (!window.confirm('Are you sure you want to delete this transaction?')) return;
     try {
       const token = localStorage.getItem('crm_token');
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/crm/expenses/${id}`, {
+      const response = await fetch(`${API_BASE}/api/crm/expenses/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
