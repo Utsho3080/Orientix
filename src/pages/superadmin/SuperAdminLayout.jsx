@@ -33,6 +33,9 @@ const SuperAdminLayout = () => {
           
           <div className="nav-section">Executive</div>
           <a href="#analytics" className="disabled-link">Google Analytics</a>
+          <NavLink to="/superadmin/expenses" className={({isActive}) => isActive ? 'active' : ''}>
+            Expense Sheet
+          </NavLink>
           <NavLink to="/superadmin/cms" className={({isActive}) => isActive ? 'active' : ''}>
             CMS Settings
           </NavLink>

@@ -35,6 +35,7 @@ import ClientOnboarding from './components/crm/ClientOnboarding';
 import CmsSettings from './components/crm/CmsSettings';
 import AuditLogs from './components/crm/AuditLogs';
 import ContactMessages from './components/crm/ContactMessages';
+import ExpenseSheet from './components/crm/ExpenseSheet';
 
 function PublicSite() {
   useEffect(() => {
@@ -130,6 +131,7 @@ function App() {
           <Route path="cms" element={<CmsSettings />} />
           <Route path="audit" element={<AuditLogs />} />
           <Route path="contact-messages" element={<ContactMessages />} />
+          <Route path="expenses" element={<ExpenseSheet />} />
         </Route>
       </Routes>
     </AuthProvider>

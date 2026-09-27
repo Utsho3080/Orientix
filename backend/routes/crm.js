@@ -268,4 +268,112 @@ router.get('/audit', verifyToken, requireSuperAdmin, async (req, res) => {
   } catch (error) { res.status(500).json({ error: 'Server error fetching audit logs' }); }
 });
 
+// --- EXPENSES (SUPER_ADMIN ONLY) ---
+router.get('/expenses', verifyToken, requireSuperAdmin, async (req, res) => {
+  try {
+    const result = await db.query(
+      `SELECT id, title, amount, type, category, 
+              TO_CHAR(expense_date, 'YYYY-MM-DD') AS expense_date, 
+              description, created_by, created_at, holding_account, partner 
+       FROM expenses 
+       ORDER BY expense_date DESC, created_at DESC`
+    );
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error fetching expenses' });
+  }
+});
+
+router.post('/expenses', verifyToken, requireSuperAdmin, async (req, res) => {
+  const { title, amount, type, category, expense_date, description, holding_account, partner } = req.body;
+  if (!title || !amount || !category) {
+    return res.status(400).json({ error: 'Title, Amount, and Category are required' });
+  }
+  const userEmail = req.user.email || 'Super Admin';
+  try {
+    const result = await db.query(
+      `INSERT INTO expenses (title, amount, type, category, expense_date, description, created_by, holding_account, partner)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) 
+       RETURNING id, title, amount, type, category, TO_CHAR(expense_date, 'YYYY-MM-DD') AS expense_date, description, created_by, created_at, holding_account, partner`,
+      [title, amount, type || 'debit', category, expense_date || new Date(), description || '', userEmail, holding_account || 'Bank', partner || null]
+    );
+    await logAudit(userEmail, 'CREATE_EXPENSE', `Created ${type || 'debit'} transaction: ${title} (₹${amount}) via ${holding_account || 'Bank'}`);
+    res.json(result.rows[0]);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error creating expense' });
+  }
+});
+
+// 1-Click Internal Account Transfer
+router.post('/expenses/transfer', verifyToken, requireSuperAdmin, async (req, res) => {
+  const { from_holding, to_holding, amount, expense_date, description } = req.body;
+  if (!from_holding || !to_holding || !amount) {
+    return res.status(400).json({ error: 'From account, To account, and Amount are required' });
+  }
+  if (from_holding.toLowerCase() === to_holding.toLowerCase()) {
+    return res.status(400).json({ error: 'From and To accounts cannot be identical' });
+  }
+  const userEmail = req.user.email || 'Super Admin';
+  const numAmount = parseFloat(amount);
+  const dateVal = expense_date || new Date();
+  const descVal = description || `Transfer from ${from_holding} to ${to_holding}`;
+
+  try {
+    // 1. Deduct from sender holding
+    const debitRes = await db.query(
+      `INSERT INTO expenses (title, amount, type, category, expense_date, description, created_by, holding_account, partner)
+       VALUES ($1, $2, 'debit', 'Transfer', $3, $4, $5, $6, $7)
+       RETURNING id, title, amount, type, category, TO_CHAR(expense_date, 'YYYY-MM-DD') AS expense_date, description, created_by, created_at, holding_account, partner`,
+      [`Transfer to ${to_holding}`, numAmount, dateVal, descVal, userEmail, from_holding, to_holding]
+    );
+
+    // 2. Deposit into receiver holding
+    const creditRes = await db.query(
+      `INSERT INTO expenses (title, amount, type, category, expense_date, description, created_by, holding_account, partner)
+       VALUES ($1, $2, 'credit', 'Transfer', $3, $4, $5, $6, $7)
+       RETURNING id, title, amount, type, category, TO_CHAR(expense_date, 'YYYY-MM-DD') AS expense_date, description, created_by, created_at, holding_account, partner`,
+      [`Transfer from ${from_holding}`, numAmount, dateVal, descVal, userEmail, to_holding, from_holding]
+    );
+
+    await logAudit(userEmail, 'TRANSFER_EXPENSE', `Internal transfer: ₹${numAmount} from ${from_holding} to ${to_holding}`);
+    res.json({ success: true, debit: debitRes.rows[0], credit: creditRes.rows[0] });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error processing transfer' });
+  }
+});
+
+router.put('/expenses/:id', verifyToken, requireSuperAdmin, async (req, res) => {
+  const { title, amount, type, category, expense_date, description, holding_account, partner } = req.body;
+  const userEmail = req.user.email || 'Super Admin';
+  try {
+    const result = await db.query(
+      `UPDATE expenses 
+       SET title = $1, amount = $2, type = $3, category = $4, expense_date = $5, description = $6, holding_account = $7, partner = $8
+       WHERE id = $9 
+       RETURNING id, title, amount, type, category, TO_CHAR(expense_date, 'YYYY-MM-DD') AS expense_date, description, created_by, created_at, holding_account, partner`,
+      [title, amount, type, category, expense_date, description, holding_account || 'Bank', partner || null, req.params.id]
+    );
+    if (result.rows.length === 0) return res.status(404).json({ error: 'Expense not found' });
+    await logAudit(userEmail, 'UPDATE_EXPENSE', `Updated transaction ID ${req.params.id}: ${title} (₹${amount})`);
+    res.json(result.rows[0]);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error updating expense' });
+  }
+});
+
+router.delete('/expenses/:id', verifyToken, requireSuperAdmin, async (req, res) => {
+  const userEmail = req.user.email || 'Super Admin';
+  try {
+    const check = await db.query('SELECT title, amount FROM expenses WHERE id = $1', [req.params.id]);
+    if (check.rows.length === 0) return res.status(404).json({ error: 'Expense not found' });
+    const { title, amount } = check.rows[0];
+    
+    await db.query('DELETE FROM expenses WHERE id = $1', [req.params.id]);
+    await logAudit(userEmail, 'DELETE_EXPENSE', `Deleted transaction: ${title} ($${amount})`);
+    res.json({ message: 'Expense deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error deleting expense' });
+  }
+});
+
 module.exports = router;
